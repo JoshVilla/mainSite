@@ -7,10 +7,29 @@ import { getSiteInfo as getSiteInfoApi } from "./services/api";
 import { getSiteInfo } from "./store/slice/siteInfoSlice";
 import { objFormat } from "./util/helpers";
 import Homepage from "./page/homepage";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import React from "react";
+import RootLayout from "./layout/RootLayout";
+import TopStories from "./page/topStories";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <React.Fragment>
+        <Route path="/" element={<RootLayout />}>
+          <Route path="homepage" element={<Homepage />} />
+          <Route path="topStories" element={<TopStories />} />
+        </Route>
+      </React.Fragment>
+    )
+  );
   useEffect(() => {
     // Fetch the site information
     getSiteInfoApi().then((res) => {
@@ -41,8 +60,7 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <Homepage />
+      <RouterProvider router={router} />
     </div>
   );
 }

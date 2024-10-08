@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { objFormat } from "@/util/helpers";
-import { IMenus, menus } from "./menus";
 import { SCREEN_SIZE } from "@/util/constant";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { IMenu, menu } from "@/util/menus";
 
 const Header = () => {
+  const navigate = useNavigate();
   const getInfo = useSelector((state: RootState) => state.siteInfo.siteInfo);
   const [openMenu, setOpenMenu] = useState(false);
   const info = objFormat(getInfo);
 
   const handleOpenMenu = () => {
-    console.log(openMenu);
     setOpenMenu((prev) => !prev);
+  };
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
   };
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const Header = () => {
         </div>
         {openMenu && (
           <div className="h-full text-center flex flex-col gap-5 mt-10 md:hidden">
-            {menus.map((menu: IMenus) => (
+            {menu.map((menu: IMenu) => (
               <a>{menu.label}</a>
             ))}
           </div>
@@ -87,8 +92,10 @@ const Header = () => {
       </div>
       <div className="bg-gray-950 py-2 hidden md:flex justify-center">
         <div className="justify-evenly w-96 flex">
-          {menus.map((items: IMenus, idx: number) => (
-            <a key={idx}>{items.label}</a>
+          {menu.map((items: IMenu, idx: number) => (
+            <a key={idx} onClick={() => handleNavigate(items.path)}>
+              {items.label}
+            </a>
           ))}
         </div>
       </div>

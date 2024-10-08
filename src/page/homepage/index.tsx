@@ -1,5 +1,5 @@
 import React from "react";
-import Highlights from "./components/highlights";
+import Highlights from "./components/highlights/highlights";
 
 type Props = {};
 
