@@ -7,13 +7,14 @@ import "swiper/css/scrollbar";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "./style.scss"; // Ensure this file contains necessary styling
 import { getHomePageInfo } from "@/services/api";
-type Props = {};
 
-const Highlights = (props: Props) => {
+const Highlights = () => {
   const [dataHighlights, setDataHighlights] = useState([]);
   useEffect(() => {
     getHomePageInfo().then((res) => {
-      setDataHighlights(res.data[0].highlights);
+      setDataHighlights(
+        res.data[0].highlights.sort((a: any, b: any) => a.sorted - b.sorted)
+      );
     });
   }, []);
 
