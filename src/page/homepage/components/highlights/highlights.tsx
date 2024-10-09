@@ -26,13 +26,25 @@ const Highlights = (props: Props) => {
         pagination={true}
         modules={[Autoplay, Pagination]}
       >
-        {dataHighlights.map((items: any, index) => (
-          <SwiperSlide key={index}>
-            <div className="swiper-slide-content">
-              <img src={items.image} alt="" />
-            </div>
-          </SwiperSlide>
-        ))}
+        {dataHighlights.map(
+          (items: any, index) =>
+            items.display === "1" && (
+              <SwiperSlide key={index}>
+                <div className="swiper-slide-content text-white">
+                  <img src={items.image} alt="" />
+                  <div className="gradient-overlay"></div>
+                  <div className="absolute text-center md:text-left top-48 md:top-56 left-1/2 transform -translate-x-1/2 md:left-32 md:transform-none">
+                    <div className="text-5xl md:text-6xl font-bold">
+                      {items.title}
+                    </div>
+                    <div className="text-md md:text-2xl mt-4 md:w-1/2">
+                      {items.content}
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            )
+        )}
       </Swiper>
     </React.Fragment>
   );

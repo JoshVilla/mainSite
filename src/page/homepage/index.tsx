@@ -6,6 +6,7 @@ type Props = {};
 const Homepage = (props: Props) => {
   return (
     <div>
+      {" "}
       <Highlights />
     </div>
   );

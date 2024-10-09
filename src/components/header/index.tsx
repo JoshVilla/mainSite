@@ -78,8 +78,17 @@ const Header = () => {
               <div className="text-md">{info.address}</div>
             </div>
           </div>
-          <div className="w-52 text-lg font-bold hidden md:block">
-            {moment().format("LL")}
+          <div className="w-68 text-lg font-bold hidden md:block">
+            {/* {moment().format("LL")} */}
+            {/* <div className="bg-gray-950 py-2 hidden md:flex justify-center"> */}
+            <div className="justify-evenly w-96 flex">
+              {menu.map((items: IMenu, idx: number) => (
+                <a key={idx} onClick={() => handleNavigate(items.path)}>
+                  {items.label}
+                </a>
+              ))}
+            </div>
+            {/* </div> */}
           </div>
         </div>
         {openMenu && (
@@ -89,15 +98,6 @@ const Header = () => {
             ))}
           </div>
         )}
-      </div>
-      <div className="bg-gray-950 py-2 hidden md:flex justify-center">
-        <div className="justify-evenly w-96 flex">
-          {menu.map((items: IMenu, idx: number) => (
-            <a key={idx} onClick={() => handleNavigate(items.path)}>
-              {items.label}
-            </a>
-          ))}
-        </div>
       </div>
     </div>
   );
