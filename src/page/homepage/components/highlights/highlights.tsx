@@ -4,19 +4,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "./style.scss"; // Ensure this file contains necessary styling
-import { getHomePageInfo } from "@/services/api";
-
-const Highlights = () => {
+interface Props {
+  data: any;
+}
+const Highlights = ({ data }: Props) => {
   const [dataHighlights, setDataHighlights] = useState([]);
   useEffect(() => {
-    getHomePageInfo().then((res) => {
-      setDataHighlights(
-        res.data[0].highlights.sort((a: any, b: any) => a.sorted - b.sorted)
-      );
-    });
-  }, []);
+    setDataHighlights(
+      data?.highlights?.sort((a: any, b: any) => a.sorted - b.sorted)
+    );
+  }, [data]);
 
   return (
     <React.Fragment>
@@ -27,7 +26,7 @@ const Highlights = () => {
         pagination={true}
         modules={[Autoplay, Pagination]}
       >
-        {dataHighlights.map(
+        {dataHighlights?.map(
           (items: any, index) =>
             items.display === "1" && (
               <SwiperSlide key={index}>
