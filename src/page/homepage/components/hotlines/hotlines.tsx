@@ -23,37 +23,37 @@ const Hotlines = ({ data }: Props) => {
 
   const Card = ({ dataCard }: ICard) => {
     return (
-      <div className=" bg-gray-950 text-white w-auto border-solid border-2 py-4 px-6 rounded-md">
-        <div className="flex gap-4 justify-center  items-center">
-          <img src={dataCard.image} className="h-14 object-contain" />
-          <div>
-            <div className="text-xl font-bold mb-2">{dataCard.title}</div>
-            <div className="flex flex-col">
-              {dataCard.hotline_1 && (
-                <div>
-                  <span className="mr-2">( Globe/TM )</span>
-                  <span>{dataCard.hotline_1}</span>
-                </div>
-              )}
-              {dataCard.hotline_2 && (
-                <div>
-                  <span className="mr-2">( Smart/TNT )</span>
-                  <span>{dataCard.hotline_2}</span>
-                </div>
-              )}
+      <div className="flex gap-3 border-b py-4">
+        <img src={dataCard.image} alt="" className="w-12 h-12" />
+        <div>
+          <div className="text-2xl font-bold">{dataCard.title}</div>
+          {dataCard.hotline_1 && (
+            <div className=" uppercase flex gap-3 text-md text-gray-600 font-bold">
+              <span className="">Globe/TM</span>
+              <span className="tracking-widest">{dataCard.hotline_1}</span>
             </div>
-          </div>
+          )}
+          {dataCard.hotline_2 && (
+            <div className="uppercase flex gap-3 text-md text-gray-600 font-bold">
+              <span>Smart/TNT</span>
+              <span className="tracking-widest">{dataCard.hotline_2}</span>
+            </div>
+          )}
         </div>
       </div>
     );
   };
   return (
-    <div className="w-full py-6">
-      <div className="text-center text-4xl font-bold mb-6">Hotlines</div>
-      <div className="py-6 md:w-1/2 mx-auto flex justify-center flex-wrap">
-        {dataHotlines?.map((items: any, index: number) => (
-          <Card dataCard={items} key={index} />
-        ))}
+    <div className="w-full pt-10">
+      <div className="text-blue-700 text-5xl font-semibold mb-6 tracking-wide">
+        Hotlines
+      </div>
+      <div>
+        <div className="flex flex-col gap-2">
+          {dataHotlines?.map((items: IData, index: number) => (
+            <Card dataCard={items} key={index} />
+          ))}
+        </div>
       </div>
     </div>
   );

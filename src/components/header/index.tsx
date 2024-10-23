@@ -6,6 +6,7 @@ import { SCREEN_SIZE } from "@/util/constant";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { IMenu, menu } from "@/util/menus";
+import style from "./style.module.scss";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,9 +32,9 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="text-white">
-      <div className="bg-gray-950 py-2 px-3 flex items-center justify-between">
-        <div className="flex items-center gap-1 flex-col md:flex-row md:gap-5">
+    <div className="">
+      <div className="bg-gray-100 py-2 flex items-center justify-between">
+        <div className="flex text-white items-center bg-blue-900 py-2 pl-4 pr-2 gap-1 flex-col md:flex-row md:gap-5 rounded-r-lg">
           {info.email && (
             <div className="flex items-center gap-3">
               <i className="fa-solid fa-envelope" />
@@ -47,7 +48,7 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex text-white gap-2 bg-blue-900 w-40 py-1 pl-2 rounded-l-lg">
           {info.accounts.facebook && (
             <a href={info.accounts.facebook} target="_blank">
               <i className="fa-brands fa-facebook"></i>
@@ -65,8 +66,8 @@ const Header = () => {
           )}
         </div>
       </div>
-      <div className="bg-slate-900 px-8 py-4">
-        <div className="flex items-center gap-3 justify-between ">
+      <div className=" px-8 py-4 shadow-lg sticky ">
+        <div className="flex items-center gap-3 justify-between text-blue-900 ">
           <div className="flex items-center gap-3 justify-between md:justify-start w-full">
             <img src={info.logo} className="w-14" alt="" />
             <i
@@ -74,13 +75,11 @@ const Header = () => {
               onClick={() => handleOpenMenu()}
             />
             <div className="hidden md:block">
-              <div className="text-3xl">{info.title}</div>
-              <div className="text-md">{info.address}</div>
+              <div className="text-4xl uppercase font-bold">{info.title}</div>
+              <div className="text-md uppercase">{info.address}</div>
             </div>
           </div>
-          <div className="w-68 text-lg font-bold hidden md:block">
-            {/* {moment().format("LL")} */}
-            {/* <div className="bg-gray-950 py-2 hidden md:flex justify-center"> */}
+          <div className="w-68 text-md uppercase font-bold hidden md:block">
             <div className="justify-evenly w-96 flex">
               {menu.map((items: IMenu, idx: number) => (
                 <a key={idx} onClick={() => handleNavigate(items.path)}>
@@ -92,7 +91,7 @@ const Header = () => {
           </div>
         </div>
         {openMenu && (
-          <div className="h-full text-center flex flex-col gap-5 mt-10 md:hidden">
+          <div className="h-full text-blue-900 font-bold uppercase text-center flex flex-col gap-5 mt-10 md:hidden">
             {menu.map((menu: IMenu) => (
               <a>{menu.label}</a>
             ))}

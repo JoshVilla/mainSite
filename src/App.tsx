@@ -24,7 +24,7 @@ function App() {
     createRoutesFromElements(
       <React.Fragment>
         <Route path="/" element={<RootLayout />}>
-          <Route path="homepage" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="topStories" element={<TopStories />} />
         </Route>
       </React.Fragment>

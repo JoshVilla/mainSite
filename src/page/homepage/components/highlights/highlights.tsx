@@ -37,7 +37,7 @@ const Highlights = ({ data }: Props) => {
                     <div className="text-5xl md:text-6xl font-bold">
                       {items.title}
                     </div>
-                    <div className="text-md md:text-2xl mt-4 md:w-1/2">
+                    <div className="uppercase hidden md:block text-md md:text-xl mt-4 md:w-1/2">
                       {items.content}
                     </div>
                   </div>

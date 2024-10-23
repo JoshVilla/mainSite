@@ -1,6 +1,6 @@
 .swiper-slide-content {
   width: 100%;
-  height: 700px; /* Set a fixed height for the slide */
+  height: 500px; /* Set a fixed height for the slide */
   position: relative;
   overflow: hidden;
 }
@@ -22,6 +22,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.06) 100%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.37) 99%);
   pointer-events: none; /* Ensures the gradient doesn't block interactions */
 }

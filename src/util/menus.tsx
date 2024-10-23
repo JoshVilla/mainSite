@@ -7,7 +7,7 @@ export interface IMenu {
 export const menu: IMenu[] = [
   {
     key: "homepage",
-    path: "homepage",
+    path: "/",
     label: "Homepage",
   },
   {
