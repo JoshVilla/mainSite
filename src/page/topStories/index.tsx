@@ -1,77 +1,86 @@
 import { getStoryInfo } from "@/services/api";
 import React, { useEffect, useState } from "react";
+import Showcase from "/assets/Showcase.jpg";
 
-type Props = {};
+interface StoryProps {
+  _id: string;
+  thumbnail: string;
+  createdAt: string;
+  thumbnailPublicId: string;
+  isDisplayed: number;
+  content: string[];
+  title: string;
+}
 
-const TopStories = (props: Props) => {
-  const [stories, setStories] = useState([]);
+const TopStories = () => {
+  const [stories, setStories] = useState<StoryProps[]>([]);
 
-  const renderLatestStory = (items) => {
-    const { thumbnail, title, createdAt, content } = items;
+  const latestStory = () => {
+    const latest = stories[0];
+    if (!latest) return null;
+
+    const { thumbnail, title, createdAt, content } = latest;
     const paragraphs = JSON.parse(content[0]);
 
     return (
-      <div>
+      <div className="w-full">
         <img
           src={thumbnail}
           alt=""
-          className="w-full h-60 object-cover shadow-xl rounded-lg"
+          className="h-72 lg:h-96 w-full object-cover rounded-2xl"
         />
-        <div className="mt-2 text-xl uppercase text-zinc-500 font-bold">
-          {createdAt}
+        <div className="mt-4 font-bold uppercase">{createdAt}</div>
+        <div className="text-2xl lg:text-4xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 my-2">
+          {title}
         </div>
-        <div className="text-5xl text-blue-900 font-bold mt-2">{title}</div>
-        <div
-          className="text-xl text-zinc-500 mt-2 w-64 overflow-hidden overflow-ellipsis 
-    line-clamp-3"
-        >
+        <div className="text-sm lg:text-md text-gray-800 break-words">
           {paragraphs.paragraph}
         </div>
       </div>
     );
   };
 
-  const renderPreviousStory = (items) => {
-    const { thumbnail, title, createdAt } = items;
+  const otherStories = (items: StoryProps) => {
+    if (!items) return null;
+    const { thumbnail, title, createdAt, content } = items;
+    const paragraphs = JSON.parse(content[0]);
+
     return (
-      <div className="flex gap-3">
+      <div className="w-80">
         <img
           src={thumbnail}
           alt=""
-          className="w-full flex-1 h-40 object-cover shadow-xl rounded-lg"
+          className="w-80 h-40 object-cover rounded-lg"
         />
-        <div className="flex-1">
-          <div className="mt-2 text-xl uppercase text-zinc-600 font-bold">
-            {createdAt}
-          </div>
-          <div className="text-4xl text-blue-900 font-bold mt-2">{title}</div>
+        <div className="mt-2 text-md font-bold uppercase">{createdAt}</div>
+        <div className="text-xl lg:text-2xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 my-2">
+          {title}
         </div>
       </div>
     );
   };
+
   useEffect(() => {
     getStoryInfo({}).then((res) => {
-      setStories(res.data.filter((o) => o.isDisplayed === 1));
+      setStories(res.data);
     });
   }, []);
-  console.log(stories);
+
   return (
-    <div>
-      <div className="text-blue-900 text-6xl font-bold mb-6">
-        Latest Stories
-      </div>
-      <div className="grid grid-rows-3 md:grid-rows-4 grid-flow-col gap-8 ">
-        {stories.map((items: any, idx: number) =>
-          idx === 0 ? (
-            <div className="row-span-1 md:row-span-4  h-96">
-              {renderLatestStory(items)}
-            </div>
-          ) : (
-            <div className="row-span-1 md:row-span-2 md:col-span-1 ">
-              {renderPreviousStory(items)}
-            </div>
-          )
-        )}
+    <div className="w-full">
+      <div className="w-5/5 lg:w-3/5 px-5 lg:px-0 mx-auto">
+        <div className="text-center text-blue-900 my-10 text-4xl font-bold">
+          Top Stories
+        </div>
+        {latestStory()}
+        <div className="mt-14">
+          <div className=" text-blue-900 text-2xl font-bold">Other Stories</div>
+          <div className="mt-10 flex gap-10">
+            {stories.map((items: StoryProps, idx: number) =>
+              idx === 0 ? null : otherStories(items)
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
