@@ -1,7 +1,8 @@
 import { getStoryInfo } from "@/services/api";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface StoryProps {
+export interface StoryProps {
   _id: string;
   thumbnail: string;
   createdAt: string;
@@ -12,14 +13,14 @@ interface StoryProps {
 }
 
 const TopStories = () => {
+  const navigate = useNavigate();
   const [stories, setStories] = useState<StoryProps[]>([]);
 
   const renderFirstStory = (items: StoryProps) => {
     if (!items) return null;
-    const { thumbnail, title, createdAt, content } = items;
+    const { thumbnail, title, createdAt, content, _id } = items;
     const paragraphs = JSON.parse(content[0]);
-    console.log(paragraphs.paragraph);
-
+    const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
     return (
       <div className="row-span-1 lg:row-span-4  ">
         <img
@@ -28,7 +29,10 @@ const TopStories = () => {
           className="w-[750px] h-52 lg:h-72 object-cover shadow-2xl rounded-lg"
         />
         <div className="mt-4 text-lg">{createdAt}</div>
-        <div className="text-2xl lg:text-4xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 ">
+        <div
+          className="text-2xl lg:text-4xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 "
+          onClick={() => goToStory(_id)}
+        >
           {title}
         </div>
       </div>
@@ -37,9 +41,8 @@ const TopStories = () => {
 
   const renderOtherStories = (items: StoryProps) => {
     if (!items) return null; // Add this check to avoid undefined items
-    const { thumbnail, title, createdAt, content } = items;
-    const paragraphs = JSON.parse(content[0]);
-    console.log(paragraphs.paragraph);
+    const { thumbnail, title, createdAt, _id } = items;
+    const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
     return (
       <div className="row-span-1 lg:row-span-2 lg:col-span-1 ">
         <div className="flex flex-col lg:flex-row lg:gap-5">
@@ -50,7 +53,10 @@ const TopStories = () => {
           />
           <div>
             <div className="mt-4 text-lg">{createdAt}</div>
-            <div className="text-2xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 ">
+            <div
+              className="text-2xl text-blue-900 cursor-pointer transition-all  hover:text-blue-700 "
+              onClick={() => goToStory(_id)}
+            >
               {title}
             </div>
           </div>

@@ -16,6 +16,7 @@ import {
 import React from "react";
 import RootLayout from "./layout/RootLayout";
 import TopStories from "./page/topStories";
+import TopStoryItems from "./page/topStories/topStoryItems";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<RootLayout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="topStories" element={<TopStories />} />
+          <Route path="topStoryItem/:id" element={<TopStoryItems />} />
         </Route>
       </React.Fragment>
     )
