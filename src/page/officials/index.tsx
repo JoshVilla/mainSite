@@ -1,6 +1,6 @@
 import { getOfficials } from "@/services/api";
 import { STATUS } from "@/util/constant";
-import Showcase from "/assets/Showcase.jpg";
+import CordonLogo from "/assets/cordonLogo.png";
 import React, { useEffect, useState } from "react";
 
 interface IOfficial {
@@ -34,7 +34,7 @@ const Officials = () => {
         key={idx}
       >
         <img
-          src={Showcase}
+          src={official.profile ? official.profile : CordonLogo}
           alt=""
           className="rounded-full h-32 w-32 md:h-40 md:w-40 object-cover"
         />
@@ -53,7 +53,7 @@ const Officials = () => {
         key={idx}
       >
         <img
-          src={Showcase}
+          src={official.profile ? official.profile : CordonLogo}
           alt=""
           className="rounded-full h-32 w-32 object-cover"
         />
