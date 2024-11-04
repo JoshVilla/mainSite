@@ -29,15 +29,18 @@ const Officials = () => {
 
   const highOfficials = (official: IOfficial, idx: number) => {
     return (
-      <div className="w-[500px] mx-auto flex items-center gap-5" key={idx}>
+      <div
+        className="w-[400px] md:w-[500px] flex lg:justify-center  items-center gap-5 "
+        key={idx}
+      >
         <img
           src={Showcase}
           alt=""
-          className="rounded-full h-40 w-40 object-cover"
+          className="rounded-full h-32 w-32 md:h-40 md:w-40 object-cover"
         />
         <div>
-          <div className="text-2xl">{official.name}</div>
-          <div className="text-gray-500">{official.position}</div>
+          <div className="text-xl md:text-2xl">{official.name}</div>
+          <div className="text-gray-500 text-md">{official.position}</div>
         </div>
       </div>
     );
@@ -46,7 +49,7 @@ const Officials = () => {
   const lowOfficials = (official: IOfficial, idx: number) => {
     return (
       <div
-        className="w-[500px] mx-auto flex flex-col justify-center items-center gap-2"
+        className="w-[200px] mx-auto flex flex-col justify-center items-center gap-2"
         key={idx}
       >
         <img
@@ -54,7 +57,7 @@ const Officials = () => {
           alt=""
           className="rounded-full h-32 w-32 object-cover"
         />
-        <div className="text-xl">{official.name}</div>
+        <div className="text-md md:text-xl">{official.name}</div>
         <div className="text-gray-500">{official.position}</div>
       </div>
     );
@@ -65,16 +68,16 @@ const Officials = () => {
   }, []);
 
   return (
-    <div className="container border  mx-auto mt-4">
-      <div className="text-center text-blue-900 my-10 text-4xl font-bold">
+    <div className="container mx-auto mt-4">
+      <div className="text-center text-blue-900 my-20 text-4xl font-bold">
         Officials
       </div>
-      <div className="flex gap-2 mb-10">
+      <div className="flex justify-center items-center mb-32 flex-col gap-10 lg:flex-row lg:gap-2">
         {data.map((official: IOfficial, idx: number) =>
           official.level > 1 ? highOfficials(official, idx) : null
         )}
       </div>
-      <div className="flex gap-2 mb-10">
+      <div className="flex gap-10 flex-wrap">
         {data.map((official: IOfficial, idx: number) =>
           official.level === 1 ? lowOfficials(official, idx) : null
         )}
