@@ -27,7 +27,7 @@ const TopStoryItems = (props: Props) => {
         <img
           src={story?.thumbnail}
           alt=""
-          className="h-72 lg:h-96 w-full object-cover rounded-2xl"
+          className="h-72 lg:h-96 w-full object-contain rounded-2xl"
         />
         <div className="mt-4 font-bold uppercase">{story?.createdAt}</div>
         <div className="text-2xl lg:text-4xl text-blue-900 my-2">

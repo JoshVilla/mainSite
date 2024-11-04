@@ -44,14 +44,14 @@ const TopStories = () => {
     );
   };
 
-  const otherStories = (items: StoryProps) => {
+  const otherStories = (items: StoryProps, keys: number) => {
     if (!items) return null;
     const { thumbnail, title, createdAt, content, _id } = items;
     const paragraphs = JSON.parse(content[0]);
     const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
 
     return (
-      <div className="w-80">
+      <div className="w-80" key={keys}>
         <img
           src={thumbnail}
           alt=""
@@ -80,12 +80,12 @@ const TopStories = () => {
         <div className="text-center text-blue-900 my-10 text-4xl font-bold">
           Top Stories
         </div>
-        {latestStory()}
+        {/* {latestStory()} */}
         <div className="mt-14">
           <div className=" text-blue-900 text-2xl font-bold">Other Stories</div>
           <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5 lg:gap-10">
             {stories.map((items: StoryProps, idx: number) =>
-              idx === 0 ? null : otherStories(items)
+              otherStories(items, idx)
             )}
           </div>
         </div>

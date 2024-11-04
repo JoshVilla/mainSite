@@ -17,6 +17,7 @@ import React from "react";
 import RootLayout from "./layout/RootLayout";
 import TopStories from "./page/topStories";
 import TopStoryItems from "./page/topStories/topStoryItems";
+import Officials from "./page/officials";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="topStories" element={<TopStories />} />
           <Route path="topStoryItem/:id" element={<TopStoryItems />} />
+          <Route path="officials" element={<Officials />} />
         </Route>
       </React.Fragment>
     )

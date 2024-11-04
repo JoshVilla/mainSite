@@ -15,4 +15,9 @@ export const menu: IMenu[] = [
     path: "topStories",
     label: "Top Stories",
   },
+  {
+    key: "officials",
+    path: "officials",
+    label: "Officials",
+  },
 ];

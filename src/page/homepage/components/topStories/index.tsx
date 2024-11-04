@@ -81,8 +81,11 @@ const TopStories = () => {
           idx === 0 ? renderFirstStory(items) : renderOtherStories(items)
         )}
       </div>
-      <div className="text-center mt-14">
-        <button className="bg-blue-950 text-white py-1 px-6 rounded-lg hover:bg-blue-900">
+      <div className="text-center lg:mt-14">
+        <button
+          className="bg-blue-950 text-white py-1 px-6 rounded-lg hover:bg-blue-900"
+          onClick={() => navigate("/topStories")}
+        >
           View All Stories
         </button>
       </div>
