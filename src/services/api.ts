@@ -11,3 +11,7 @@ export const getHomePageInfo = (params = {}) => {
 export const getStoryInfo = (params = {}) => {
   return post("http://localhost:5000/topStoriesInfo", params);
 };
+
+export const getOfficials = (params = {}) => {
+  return post("http://localhost:5000/getOfficials", params);
+};

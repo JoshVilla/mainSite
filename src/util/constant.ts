@@ -3,3 +3,7 @@ export const SCREEN_SIZE = {
   MEDIUM: 768,
   LARGE: 1024,
 };
+
+export const STATUS = {
+  SUCCESS: 200,
+};

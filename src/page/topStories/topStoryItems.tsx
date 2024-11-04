@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { StoryProps } from "../homepage/components/topStories";
 import { useParams } from "react-router-dom";
 import { getStoryInfo } from "@/services/api";
+import { STATUS } from "@/util/constant";
 
-type Props = {};
-
-const TopStoryItems = (props: Props) => {
+const TopStoryItems = () => {
   const [story, setStory] = useState<StoryProps | null>(null);
   const { id } = useParams();
   useEffect(() => {
     getStoryInfo({ id }).then((res) => {
-      if (res.status === 200) {
+      if (res.status === STATUS.SUCCESS) {
         const { content } = res.data[0];
         const parsedContent = content.map((item: any) => JSON.parse(item));
 

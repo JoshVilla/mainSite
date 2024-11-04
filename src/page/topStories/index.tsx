@@ -47,7 +47,6 @@ const TopStories = () => {
   const otherStories = (items: StoryProps, keys: number) => {
     if (!items) return null;
     const { thumbnail, title, createdAt, content, _id } = items;
-    const paragraphs = JSON.parse(content[0]);
     const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
 
     return (
