@@ -4,6 +4,7 @@ import Showcase from "/assets/Showcase.jpg";
 import { useNavigate } from "react-router-dom";
 import Pagination from "@/components/pagination/pagination";
 import { STATUS } from "@/util/constant";
+import CImage from "@/components/CImage/image";
 interface StoryProps {
   _id: string;
   thumbnail: string;
@@ -23,6 +24,7 @@ interface PageProps {
 const TopStories = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState<StoryProps[]>([]);
+  const [loading, setLoading] = useState(true);
   const [pageObj, setPageObj] = useState<PageProps>({
     totalPage: 0,
     currentPage: 0,
@@ -64,8 +66,8 @@ const TopStories = () => {
 
     return (
       <div className="w-80" key={keys}>
-        <img
-          src={thumbnail}
+        <CImage
+          imageSrc={thumbnail}
           alt=""
           className="w-80 h-40 object-cover rounded-lg"
         />
@@ -85,6 +87,7 @@ const TopStories = () => {
       const response = await getStoryInfo(params);
       const { status, data } = response;
       if (status === STATUS.SUCCESS) {
+        setLoading(false);
         setStories(data.data);
         setPageObj({
           totalPage: data.totalPages,
@@ -98,6 +101,7 @@ const TopStories = () => {
   };
 
   const onChangePage = (page: number) => {
+    setLoading(true);
     onLoad({ page });
   };
 
@@ -113,20 +117,26 @@ const TopStories = () => {
         </div>
         {/* {latestStory()} */}
         <div className="mt-14">
-          <div className=" text-blue-900 text-2xl font-bold">Other Stories</div>
-          <div className="mt-10 flex flex-wrap justify-center gap-5 lg:gap-10">
-            {stories.map((items: StoryProps, idx: number) =>
-              otherStories(items, idx)
-            )}
+          {/* <div className=" text-blue-900 text-2xl font-bold">Other Stories</div> */}
+          {loading ? (
+            <div className="text-center">Fetching Data...</div>
+          ) : (
+            <div className="mt-10 flex flex-wrap justify-center gap-5 lg:gap-10">
+              {stories.map((items: StoryProps, idx: number) =>
+                otherStories(items, idx)
+              )}
+            </div>
+          )}
+        </div>
+        {!loading && (
+          <div className="text-center py-8">
+            <Pagination
+              totalPages={pageObj.totalPage}
+              currentPage={pageObj.currentPage}
+              onChange={onChangePage}
+            />
           </div>
-        </div>
-        <div className="text-center w-1/2">
-          <Pagination
-            totalPages={pageObj.totalPage}
-            currentPage={pageObj.currentPage}
-            onChange={onChangePage}
-          />
-        </div>
+        )}
       </div>
     </div>
   );
