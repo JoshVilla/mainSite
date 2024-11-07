@@ -69,7 +69,7 @@ const TopStories = () => {
 
   useEffect(() => {
     getStoryInfo({}).then((res) => {
-      setStories(res.data);
+      setStories(res.data.data);
     });
   }, []);
 
