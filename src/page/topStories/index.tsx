@@ -2,6 +2,8 @@ import { getStoryInfo } from "@/services/api";
 import React, { useEffect, useState } from "react";
 import Showcase from "/assets/Showcase.jpg";
 import { useNavigate } from "react-router-dom";
+import Pagination from "@/components/pagination/pagination";
+import { STATUS } from "@/util/constant";
 interface StoryProps {
   _id: string;
   thumbnail: string;
@@ -12,9 +14,20 @@ interface StoryProps {
   title: string;
 }
 
+interface PageProps {
+  totalPage: number;
+  currentPage: number;
+  pageSize: number;
+}
+
 const TopStories = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState<StoryProps[]>([]);
+  const [pageObj, setPageObj] = useState<PageProps>({
+    totalPage: 0,
+    currentPage: 0,
+    pageSize: 0,
+  });
 
   const latestStory = () => {
     const latest = stories[0];
@@ -67,26 +80,47 @@ const TopStories = () => {
     );
   };
 
+  const onLoad = async () => {
+    try {
+      const response = await getStoryInfo({});
+      const { status, data } = response;
+      if (status === STATUS.SUCCESS) {
+        setStories(data.data);
+        setPageObj({
+          totalPage: data.totalPages,
+          pageSize: data.pageSize,
+          currentPage: data.currentPage,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getStoryInfo({}).then((res) => {
-      setStories(res.data.data);
-    });
+    onLoad();
   }, []);
 
   return (
     <div className="w-full">
-      <div className="w-5/5 lg:w-3/5 px-5 lg:px-0 mx-auto">
+      <div className="w-5/5 lg:w-5/6 px-5 lg:px-0 mx-auto">
         <div className="text-center text-blue-900 my-10 text-4xl font-bold">
           Top Stories
         </div>
         {/* {latestStory()} */}
         <div className="mt-14">
           <div className=" text-blue-900 text-2xl font-bold">Other Stories</div>
-          <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5 lg:gap-10">
+          <div className="mt-10 flex flex-wrap justify-center gap-5 lg:gap-10">
             {stories.map((items: StoryProps, idx: number) =>
               otherStories(items, idx)
             )}
           </div>
+        </div>
+        <div className="text-center w-1/2">
+          <Pagination
+            totalPages={pageObj.totalPage}
+            currentPage={pageObj.currentPage}
+          />
         </div>
       </div>
     </div>

@@ -10,12 +10,12 @@ const TopStoryItems = () => {
   useEffect(() => {
     getStoryInfo({ id }).then((res) => {
       if (res.status === STATUS.SUCCESS) {
-        const { content } = res.data[0];
+        const { content } = res.data.data[0];
         const parsedContent = content.map((item: any) => JSON.parse(item));
 
         console.log(content, "parsedContent");
 
-        setStory({ ...res.data[0], content: parsedContent });
+        setStory({ ...res.data.data[0], content: parsedContent });
       }
     });
   }, [id]);
