@@ -80,9 +80,9 @@ const TopStories = () => {
     );
   };
 
-  const onLoad = async () => {
+  const onLoad = async (params = {}) => {
     try {
-      const response = await getStoryInfo({});
+      const response = await getStoryInfo(params);
       const { status, data } = response;
       if (status === STATUS.SUCCESS) {
         setStories(data.data);
@@ -95,6 +95,10 @@ const TopStories = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const onChangePage = (page: number) => {
+    onLoad({ page });
   };
 
   useEffect(() => {
@@ -120,6 +124,7 @@ const TopStories = () => {
           <Pagination
             totalPages={pageObj.totalPage}
             currentPage={pageObj.currentPage}
+            onChange={onChangePage}
           />
         </div>
       </div>

@@ -3,9 +3,10 @@ import React from "react";
 type Props = {
   totalPages: number;
   currentPage: number;
+  onChange: (page: number) => void;
 };
 
-const Pagination = ({ totalPages, currentPage }: Props) => {
+const Pagination = ({ totalPages, currentPage, onChange }: Props) => {
   const arrPage = [];
   if (totalPages >= 1) {
     for (let i = 1; i <= totalPages; i++) {
@@ -13,14 +14,12 @@ const Pagination = ({ totalPages, currentPage }: Props) => {
     }
   }
 
-  console.log(currentPage);
-
   const defaultClass = "border-2 px-2 rounded-md";
   const activeClass = "bg-blue-900 text-white";
   return (
     <div className="flex gap-2 justify-center">
       <button
-        // onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => onChange(currentPage - 1)}
         className={`${defaultClass} ${
           currentPage === 1 ? "opacity-50 cursor-not-allowed" : activeClass
         }`}
@@ -31,7 +30,7 @@ const Pagination = ({ totalPages, currentPage }: Props) => {
 
       {arrPage.map((item, index) => (
         <button
-          // onClick={() => onPageChange(item)}
+          onClick={() => onChange(item)}
           className={`${defaultClass} ${
             currentPage === item ? activeClass : ""
           }`}
@@ -42,7 +41,7 @@ const Pagination = ({ totalPages, currentPage }: Props) => {
       ))}
 
       <button
-        // onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => onChange(currentPage + 1)}
         className={`${defaultClass} ${
           currentPage === arrPage.length
             ? "opacity-50 cursor-not-allowed"
