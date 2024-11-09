@@ -16,13 +16,13 @@ const TopStories = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState<StoryProps[]>([]);
 
-  const renderFirstStory = (items: StoryProps) => {
+  const renderFirstStory = (items: StoryProps, idx: number) => {
     if (!items) return null;
     const { thumbnail, title, createdAt, content, _id } = items;
     const paragraphs = JSON.parse(content[0]);
     const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
     return (
-      <div className="row-span-1 lg:row-span-4  ">
+      <div className="row-span-1 lg:row-span-4" key={idx}>
         <img
           src={thumbnail}
           alt=""
@@ -39,12 +39,12 @@ const TopStories = () => {
     );
   };
 
-  const renderOtherStories = (items: StoryProps) => {
+  const renderOtherStories = (items: StoryProps, idx: number) => {
     if (!items) return null; // Add this check to avoid undefined items
     const { thumbnail, title, createdAt, _id } = items;
     const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
     return (
-      <div className="row-span-1 lg:row-span-2 lg:col-span-1 ">
+      <div className="row-span-1 lg:row-span-2 lg:col-span-1 " key={idx}>
         <div className="flex flex-col lg:flex-row lg:gap-5">
           <img
             src={thumbnail}
@@ -78,7 +78,9 @@ const TopStories = () => {
       </div>
       <div className="grid grid-rows-4 grid-flow-col gap-4">
         {stories.map((items: StoryProps, idx: number) =>
-          idx === 0 ? renderFirstStory(items) : renderOtherStories(items)
+          idx === 0
+            ? renderFirstStory(items, idx)
+            : renderOtherStories(items, idx)
         )}
       </div>
       <div className="text-center lg:mt-14">

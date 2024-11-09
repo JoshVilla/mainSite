@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 interface IData {
   _id: string;
   hotline_1: string;
@@ -8,52 +7,39 @@ interface IData {
   imagePublicId: string;
   title: string;
 }
-interface Props {
-  data: any;
-}
 
 interface ICard {
-  dataCard: IData;
+  data: IData[];
 }
-const Hotlines = ({ data }: Props) => {
-  const [dataHotlines, setDataHotlines] = useState([]);
-  useEffect(() => {
-    setDataHotlines(data?.hotlines);
-  }, [data]);
 
-  const Card = ({ dataCard }: ICard) => {
+const Hotlines = ({ data }: ICard) => {
+  const hotlineCard = (hotline: IData, index: number) => {
     return (
-      <div className="flex gap-3 border-b py-4">
-        <img src={dataCard.image} alt="" className="w-12 h-12" />
+      <div className="flex items-center gap-5 p-4" key={index}>
+        <img
+          src={hotline.image}
+          className="rounded-full w-16 h-16 object-cover"
+          alt=""
+        />
         <div>
-          <div className="text-2xl font-bold">{dataCard.title}</div>
-          {dataCard.hotline_1 && (
-            <div className=" uppercase flex gap-3 text-md text-gray-600 font-bold">
-              <span className="">Globe/TM</span>
-              <span className="tracking-widest">{dataCard.hotline_1}</span>
-            </div>
-          )}
-          {dataCard.hotline_2 && (
-            <div className="uppercase flex gap-3 text-md text-gray-600 font-bold">
-              <span>Smart/TNT</span>
-              <span className="tracking-widest">{dataCard.hotline_2}</span>
-            </div>
-          )}
+          <div className="text-lg text-gray-700 font-bold">{hotline.title}</div>
+          <div className="text-gray-500 flex gap-5">
+            {hotline.hotline_1 && <span>Globe/TM - {hotline.hotline_1}</span>}
+            {hotline.hotline_2 && <span>Smart/TNT - {hotline.hotline_2}</span>}
+          </div>
         </div>
       </div>
     );
   };
   return (
-    <div className="w-full pt-10">
-      <div className="text-blue-700 text-5xl font-semibold mb-6 tracking-wide">
-        Hotlines
+    <div className="w-full">
+      <div className="text-2xl text-blue-900 font-bold mb-6">
+        Emergency Hotlines
       </div>
-      <div>
-        <div className="flex flex-col gap-2">
-          {dataHotlines?.map((items: IData, index: number) => (
-            <Card dataCard={items} key={index} />
-          ))}
-        </div>
+      <div className="flex flex-col gap-5">
+        {data.length > 0
+          ? data.map((items: IData, index: number) => hotlineCard(items, index))
+          : "No hotlines yet"}
       </div>
     </div>
   );

@@ -2,15 +2,28 @@ import React, { useEffect, useState } from "react";
 import { getHomePageInfo } from "@/services/api";
 import Showcase from "/assets/Showcase.jpg";
 import TopStories from "./components/topStories";
+import { STATUS } from "@/util/constant";
+import Hotlines from "./components/hotlines/hotlines";
 type Props = {};
 
 const Homepage = (props: Props) => {
   const [data, setData] = useState([]);
+  const [hotlineData, setHotlineData] = useState([]);
   useEffect(() => {
-    getHomePageInfo().then((res) => {
-      setData(res.data[0]);
-    });
+    onLoad();
   }, []);
+
+  const onLoad = async () => {
+    try {
+      const response = await getHomePageInfo();
+      if (response.status === STATUS.SUCCESS) {
+        setData(response.data[0]);
+        setHotlineData(response.data[0].hotlines);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -32,12 +45,14 @@ const Homepage = (props: Props) => {
       <div className="container mx-auto py-16 w-4/5">
         <TopStories />
       </div>
-      {/* <div className="flex w-3/4 mx-auto">
-        <div className="flex-none w-1/3">
-          <Hotlines data={data} />
+      <div className="container mx-auto py-16 w-4/5">
+        <div className="flex">
+          <div className="flex-1">
+            <Hotlines data={hotlineData} />
+          </div>
+          <div className="flex-1">dd</div>
         </div>
-        <div className="flex-1"></div>
-      </div> */}
+      </div>
     </div>
   );
 };

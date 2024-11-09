@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import "./App.css";
-import Header from "./components/header";
 import { AppDispatch } from "./store/store";
 import { useDispatch } from "react-redux";
 import { getSiteInfo as getSiteInfoApi } from "./services/api";
