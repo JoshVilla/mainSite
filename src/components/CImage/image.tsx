@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultImage from "../../../public/assets/cordonLogo.png";
+import DefaultImage from "/assets/cordonLogo.png";
 type Props = {
   imageSrc?: string;
   alt?: string;

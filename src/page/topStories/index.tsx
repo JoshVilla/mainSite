@@ -87,7 +87,6 @@ const TopStories = () => {
       const response = await getStoryInfo(params);
       const { status, data } = response;
       if (status === STATUS.SUCCESS) {
-        setLoading(false);
         setStories(data.data);
         setPageObj({
           totalPage: data.totalPages,
@@ -97,6 +96,8 @@ const TopStories = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,7 +116,6 @@ const TopStories = () => {
         <div className="text-center text-blue-900 my-10 text-4xl font-bold">
           Top Stories
         </div>
-        {/* {latestStory()} */}
         <div className="mt-14">
           {/* <div className=" text-blue-900 text-2xl font-bold">Other Stories</div> */}
           {loading ? (

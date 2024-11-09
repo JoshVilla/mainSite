@@ -67,7 +67,7 @@ const TopStories = () => {
 
   useEffect(() => {
     getStoryInfo({}).then((res) => {
-      setStories(res.data.filter((o: StoryProps) => o.isDisplayed === 1));
+      setStories(res.data.data.filter((o: StoryProps) => o.isDisplayed === 1));
     });
   }, []);
 
