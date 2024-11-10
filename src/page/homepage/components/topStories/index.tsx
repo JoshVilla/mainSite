@@ -44,7 +44,7 @@ const TopStories = () => {
     const { thumbnail, title, createdAt, _id } = items;
     const goToStory = (id: string) => navigate(`/topStoryItem/${id}`);
     return (
-      <div className="row-span-1 lg:row-span-2 lg:col-span-1 " key={idx}>
+      <div className="row-span-1 lg:row-span-2 lg:col-span-1" key={idx}>
         <div className="flex flex-col lg:flex-row lg:gap-5">
           <img
             src={thumbnail}
@@ -76,7 +76,7 @@ const TopStories = () => {
       <div className="text-blue-900 text-2xl lg:text-5xl font-bold mb-8">
         Latest Stories
       </div>
-      <div className="grid grid-rows-4 grid-flow-col gap-4">
+      <div className="grid grid-rows-3 lg:grid-rows-4 grid-flow-col gap-4">
         {stories.map((items: StoryProps, idx: number) =>
           idx === 0
             ? renderFirstStory(items, idx)

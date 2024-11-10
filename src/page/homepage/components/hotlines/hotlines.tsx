@@ -18,12 +18,12 @@ const Hotlines = ({ data }: ICard) => {
       <div className="flex items-center gap-5 p-4" key={index}>
         <img
           src={hotline.image}
-          className="rounded-full w-16 h-16 object-cover"
+          className="rounded-full w-16 h-16 object-cover border-2"
           alt=""
         />
         <div>
           <div className="text-lg text-gray-700 font-bold">{hotline.title}</div>
-          <div className="text-gray-500 flex gap-5">
+          <div className="text-gray-500 flex gap-2 md:gap-5 flex-col md:flex-row">
             {hotline.hotline_1 && <span>Globe/TM - {hotline.hotline_1}</span>}
             {hotline.hotline_2 && <span>Smart/TNT - {hotline.hotline_2}</span>}
           </div>

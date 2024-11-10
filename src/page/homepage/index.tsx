@@ -45,8 +45,8 @@ const Homepage = (props: Props) => {
       <div className="container mx-auto py-16 w-4/5">
         <TopStories />
       </div>
-      <div className="container mx-auto py-16 w-4/5">
-        <div className="flex">
+      <div className="container mx-auto w-4/5">
+        <div className="flex flex-col lg:flex-row">
           <div className="flex-1">
             <Hotlines data={hotlineData} />
           </div>
